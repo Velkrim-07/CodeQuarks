@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "212185335749",
+    "project_id": "codequarks-a06c0",
+    "storage_bucket": "codequarks-a06c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212185335749:android:f36547eba7c2e000816dac",
+        "android_client_info": {
+          "package_name": "com.example.codequarks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUS-jLSUb_JuXy3QxPqqvUV6UUA2rc7pY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
