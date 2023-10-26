@@ -32,22 +32,12 @@
         app:navGraph="@navigation/mobile_navigation" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/displayButton"
         android:layout_width="159dp"
         android:layout_height="107dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Add Entry"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="159dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="16dp"
-        android:text="Delete Entry"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="44dp"
+        android:text="Display Entry"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,8 +55,8 @@
         android:id="@+id/CameraButton"
         android:layout_width="159dp"
         android:layout_height="107dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="492dp"
         android:text="Camera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
