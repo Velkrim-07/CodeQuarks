@@ -3,10 +3,9 @@ package com.example.codequarks
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
-import android.media.Image
-import android.nfc.Tag
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,8 +19,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.codequarks.databinding.ActivityMainBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
@@ -31,7 +28,7 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var button: Button
+    lateinit var cameraButton: Button
     lateinit var ImageView: ImageView
     val REQUEST_IMAGE_CAPTURE = 100
 
@@ -55,16 +52,16 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         //Button, Textview, and Database declaration
-        val anotherButton: Button = findViewById(R.id.displayButton) //Button to display the data in the database
+        val displayButton: Button = findViewById(R.id.displayButton) //Button to display the data in the database
         val myTextView = findViewById<TextView>(R.id.textView) //TextView to show the entry in the database
         val database = Firebase.database //Database connection
 
-        val myList = listOf("Variable", "Classes", "Functions", "Overview", "message") //List of all the keys for the database entries
+        val myList = listOf("Variable/Desc", "Classes/Desc", "Functions/Desc", "Overview/Desc", "message/Desc") //List of all the keys for the database entries
         val randomIndex = Random.nextInt(myList.size) //random index of the array to apply randomness
         val randomElement = myList[randomIndex] //Get the random key from the array
-        val myRef = database.getReference(randomElement).child("Desc") //get the entry from the database
+        val myRef = database.getReference("Camie")//get the description of the entry from the database
 
-        anotherButton.setOnClickListener {// Displays the Description of the topic to the user
+        displayButton.setOnClickListener {// Displays the Description of the topic to the user
             myRef.addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val value = snapshot.getValue<String>()
@@ -78,9 +75,9 @@ class MainActivity : AppCompatActivity() {
 
 
         ImageView = findViewById(R.id.imageSave) //Grabs the image view with the id
-        button = findViewById(R.id.CameraButton) //Button for taking a picture
+        cameraButton = findViewById(R.id.CameraButton) //Button for taking a picture
 
-        button.setOnClickListener {//When the button is clicked initiate the camera
+        cameraButton.setOnClickListener {//When the button is clicked initiate the camera
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
                 startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE)
@@ -98,5 +95,13 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    fun goBackHome(view: View) {
+        setContentView(R.layout.activity_main)
+    }
+
+    fun goToQuiz(view: View) {
+        setContentView(R.layout.quiz_activity)
     }
 }

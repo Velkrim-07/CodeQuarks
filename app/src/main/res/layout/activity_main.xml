@@ -35,9 +35,20 @@
         android:id="@+id/displayButton"
         android:layout_width="159dp"
         android:layout_height="107dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
         android:text="Display Entry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/quizButton"
+        android:layout_width="159dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="236dp"
+        android:layout_marginTop="44dp"
+        android:onClick="goToQuiz"
+        android:text="Quiz Time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
