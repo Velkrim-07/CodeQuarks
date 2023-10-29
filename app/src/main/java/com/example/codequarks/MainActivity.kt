@@ -56,15 +56,15 @@ class MainActivity : AppCompatActivity() {
         val myTextView = findViewById<TextView>(R.id.textView) //TextView to show the entry in the database
         val database = Firebase.database //Database connection
 
-        val myList = listOf("Variable/Desc", "Classes/Desc", "Functions/Desc", "Overview/Desc", "message/Desc") //List of all the keys for the database entries
+        val myList = listOf("Variable", "Classes", "Functions", "Overview", "message") //List of all the keys for the database entries
         val randomIndex = Random.nextInt(myList.size) //random index of the array to apply randomness
         val randomElement = myList[randomIndex] //Get the random key from the array
-        val myRef = database.getReference("Camie")//get the description of the entry from the database
+        val myRef = database.getReference(randomElement).child("Desc")//get the description of the entry from the database
 
         displayButton.setOnClickListener {// Displays the Description of the topic to the user
             myRef.addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val value = snapshot.getValue<String>()
+                    val value = snapshot.getValue<String>() // Broken but will be fixed ASAP
                     myTextView.text = value
                 }
                 override fun onCancelled(error: DatabaseError){
