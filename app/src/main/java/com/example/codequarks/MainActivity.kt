@@ -20,8 +20,8 @@ import com.example.codequarks.databinding.ActivityMainBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
 import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import kotlin.random.Random
 
@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var cameraButton: Button
     lateinit var ImageView: ImageView
     val REQUEST_IMAGE_CAPTURE = 100
+    val database = Firebase.database //Database connection
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         //Button, Textview, and Database declaration
         val displayButton: Button = findViewById(R.id.displayButton) //Button to display the data in the database
         val myTextView = findViewById<TextView>(R.id.textView) //TextView to show the entry in the database
-        val database = Firebase.database //Database connection
 
         val myList = listOf("Variable", "Classes", "Functions", "Overview", "message") //List of all the keys for the database entries
         val randomIndex = Random.nextInt(myList.size) //random index of the array to apply randomness
@@ -64,8 +64,8 @@ class MainActivity : AppCompatActivity() {
         displayButton.setOnClickListener {// Displays the Description of the topic to the user
             myRef.addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val value = snapshot.getValue<String>() // Broken but will be fixed ASAP
-                    myTextView.text = value
+                    val value = snapshot.getValue<String>()
+                    myTextView.text = value //sets the text view so the description is displayed to the user
                 }
                 override fun onCancelled(error: DatabaseError){
                     myTextView.text = "Failed to load data"
@@ -103,5 +103,25 @@ class MainActivity : AppCompatActivity() {
 
     fun goToQuiz(view: View) {
         setContentView(R.layout.quiz_activity)
+        val quizTextView : TextView = findViewById<TextView>(R.id.Prompt)
+        var quizRef = database.getReference("message").child("Quiz").child("Prompt")
+        quizRef.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.getValue<String>()
+                quizTextView.text = value //sets the text view so the description is displayed to the user
+            }
+            override fun onCancelled(error: DatabaseError){
+                quizTextView.text = "Failed to load data"
+            }
+        })
+        val Button1 : Button = findViewById(R.id.Choice1)
+        val Button2 : Button = findViewById(R.id.Choice2)
+        val Button3 : Button = findViewById(R.id.Choice3)
+        val Button4 : Button = findViewById(R.id.Choice4)
+        Button1.text = "Hello"
+        Button2.text = "World"
+        Button3.text = "EhLLo"
+        Button4.text = "DLrow"
+
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/Choice22"
+        android:id="@+id/Choice2"
         android:layout_width="159dp"
         android:layout_height="107dp"
         android:layout_marginStart="236dp"
