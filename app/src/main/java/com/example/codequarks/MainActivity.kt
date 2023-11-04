@@ -78,10 +78,10 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
-        val leftNavView : NavigationView = findViewById(R.id.left_nav_view)
+        //val drawerLayout : DrawerLayout = findViewById(R.id.drawerLayout)
+        //val leftNavView : NavigationView = findViewById(R.id.left_nav_view)
 
-        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+        /*toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_settings -> Toast.makeText(applicationContext, "Clicked settings", Toast.LENGTH_SHORT).show()
             }
             true
-        }
+        }*/
 
         ImageView = findViewById(R.id.imageSave) //Grabs the image view with the id
         cameraButton = findViewById(R.id.CameraButton) //Button for taking a picture
