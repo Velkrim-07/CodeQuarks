@@ -66,39 +66,36 @@ class MainActivity : AppCompatActivity() {
         cameraButton = findViewById(R.id.CameraButton) //Button for taking a picture
 
         cameraButton.setOnClickListener {//When the button is clicked initiate the camera
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            setContentView(R.layout.fragment_camera)
+           /* val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
                 startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE)
             } catch (e: ActivityNotFoundException){
                 Toast.makeText(this, "Error: " + e.localizedMessage, Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
             val imageBitmap = data?.extras?.get("data") as Bitmap //save the data as a bitmap to be plotted onto the image view
             ImageView.setImageBitmap(imageBitmap) //Plot the bitmap on the image view
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
-    }
+    }*/
 
     fun goToDesc(view: View) {
-        setContentView(R.layout.description_activity)
-        var myDesc = DescriptionActivity(this, database, randomElement)
-        myDesc.onCreateDescription()
+        setContentView(R.layout.fragment_desc)
     }
 
     fun goToQuiz(view: View) {
-        setContentView(R.layout.quiz_activity)
-        var myQuiz = QuizActivity(this, database, randomElement)
-        myQuiz.onCreateQuiz()
+        setContentView(R.layout.fragment_quiz)
     }
 
     fun goBackHome(view: View) {
-        setContentView(R.layout.fragment_blank)
+        setContentView(R.layout.activity_main)
     }
 
 }
