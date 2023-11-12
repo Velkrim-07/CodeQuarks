@@ -12,23 +12,30 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavHost
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.codequarks.databinding.ActivityMainBinding
+import com.example.codequarks.ui.home.HomeFragmentDirections
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.getValue
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import kotlin.concurrent.fixedRateTimer
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
     lateinit var cameraButton: Button
+    lateinit var displayButton: Button
     lateinit var ImageView: ImageView
     val REQUEST_IMAGE_CAPTURE = 100
     var randomElement: String = ""
@@ -53,8 +60,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+
         //Button, Textview, and Database declaration
-        val displayButton: Button = findViewById(R.id.displayButton) //Button to display the data in the database
+        displayButton = findViewById(R.id.menu_Description_Button) //Button to display the data in the database
         //TextView to show the entry in the database
 
         val myList = listOf("Variable", "Classes", "Functions", "Overview", "message") //List of all the keys for the database entries
@@ -62,8 +70,8 @@ class MainActivity : AppCompatActivity() {
         randomElement = myList[randomIndex] //Get the random key from the array
         val myRef = database.getReference(randomElement).child("Desc")//get the description of the entry from the database
 
-        ImageView = findViewById(R.id.imageSave) //Grabs the image view with the id
-        cameraButton = findViewById(R.id.CameraButton) //Button for taking a picture
+        //ImageView = findViewById(R.id.imageSave) //Grabs the image view with the id
+        cameraButton = findViewById(R.id.menu_Camera_Button) //Button for taking a picture
 
         cameraButton.setOnClickListener {//When the button is clicked initiate the camera
             setContentView(R.layout.fragment_camera)
@@ -87,7 +95,21 @@ class MainActivity : AppCompatActivity() {
     }*/
 
     fun goToDesc(view: View) {
-        setContentView(R.layout.fragment_desc)
+        var navController : NavController
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navigation_home) as? NavHostFragment
+        navHostFragment?.let{navHostFragment ->
+            navController = NavHostFragment.findNavController(navHostFragment)
+            val action = HomeFragmentDirections.actionNavigationHomeToDesc()
+            if (navController.currentDestination != null) {
+                navController.navigate(action)
+            }
+            else
+            {
+                displayButton.text = "Fuck You"
+            }
+        } ?: run {
+
+        }
     }
 
     fun goToQuiz(view: View) {
