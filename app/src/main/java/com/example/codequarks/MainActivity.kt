@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
@@ -79,17 +80,20 @@ class MainActivity : AppCompatActivity() {
         val myRef = database.getReference(randomElement)
             .child("Desc")//get the description of the entry from the database
 
-        //ImageView = findViewById(R.id.imageSave) //Grabs the image view with the id
+        ImageView = findViewById(R.id.menu_image) //Grabs the image view with the id
         cameraButton = findViewById(R.id.menu_Camera_Button) //Button for taking a picture
 
-        cameraButton.setOnClickListener {//When the button is clicked initiate the camera
-            setContentView(R.layout.fragment_camera)
-            /* val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        /*cameraButton.setOnClickListener {//When the button is clicked initiate the camera
+             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
                 startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE)
             } catch (e: ActivityNotFoundException){
                 Toast.makeText(this, "Error: " + e.localizedMessage, Toast.LENGTH_SHORT).show()
-            }*/
+            }
+        }*/
+        val myCamera : Fragment = Camera()
+        binding.menuCameraButton.setOnClickListener {
+            replaceFragment(myCamera)
         }
 
     }
@@ -120,7 +124,8 @@ class MainActivity : AppCompatActivity() {
         } ?: run {
 
         }*/
-        setContentView(R.layout.fragment_desc)
+
+        /*setContentView(R.layout.fragment_desc)
         val DescTextView: TextView = findViewById(R.id.Desc)
         var DescRef = database.getReference("message").child("Desc")
         DescRef.addValueEventListener(object : ValueEventListener {
@@ -133,7 +138,7 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 DescTextView.text = "Failed to load data"
             }
-        })
+        })*/
     }
 
     fun goToQuiz(view: View) {
@@ -162,7 +167,7 @@ class MainActivity : AppCompatActivity() {
         Button4.text = "Wrong3"
     }
 
-    fun goToCamera(view: View) {
+    /*fun goToCamera(view: View) {
         setContentView(R.layout.fragment_camera)
 
         ImageView = findViewById(R.id.imageSave) //Grabs the image view with the id
@@ -177,9 +182,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun goBackHome(view: View) {
-            setContentView(R.layout.activity_main)
-        }
+    }*/
 
+    fun goBackHome(view: View) {
+        setContentView(R.layout.activity_main)
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+        (this as AppCompatActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.homeFragment, fragment)
+            .commit()
     }
 }
