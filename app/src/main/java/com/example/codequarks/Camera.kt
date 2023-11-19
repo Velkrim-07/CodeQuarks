@@ -35,6 +35,8 @@ class Camera : Fragment() {
             takePicture.text = "Fuck You"
         }
 
+        //Doesn't work
+
        /*imageView = this.requireView().findViewById(R.id.imageSave) //Grabs the image view with the id
         val takePicture : Button = this.requireView().findViewById(R.id.Camera) //Button for taking a picture
 
