@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 
 
 /**
@@ -28,6 +29,12 @@ class Camera : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_camera, container, false)
+        val takePicture : Button = rootView.findViewById(R.id.Camera)
+        takePicture.setOnClickListener {
+            takePicture.text = "Fuck You"
+        }
+
        /*imageView = this.requireView().findViewById(R.id.imageSave) //Grabs the image view with the id
         val takePicture : Button = this.requireView().findViewById(R.id.Camera) //Button for taking a picture
 
